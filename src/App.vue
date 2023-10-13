@@ -1,6 +1,6 @@
 <template>
   <header>Barcode-Scanner</header>
-  <button @click="toggleKamera">Scan</button>
+  <button @click="toggleKamera">Start Scan</button>
   <p v-if="successTest">  Gescannt</p>
   <StreamBarcodeReader
     @decode="onDecode"
@@ -25,7 +25,7 @@ export default {
   methods: {
     onDecode(text) {
       console.log(`Decode text from QR code is ${text}`)
-      decodedText = text
+      this.decodedText = text
     },
     onLoaded() {
       console.log(`Ready to start scanning barcodes`)
