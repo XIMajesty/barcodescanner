@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       decodedText: null,
-      successTest: false
+      successTest: false,
     };
   },
   components: {
