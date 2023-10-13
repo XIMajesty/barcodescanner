@@ -1,31 +1,31 @@
 <template>
-  <header>Barcode-Scanner</header>
-  <button @click="toggleText">Scan</button>
-  <p v-if="successTest">  Gescannt</p>
-  <StreamBarcodeReader
-    @decode="onDecode"
-    @loaded="onLoaded"
-  ></StreamBarcodeReader>
+  <div>
+    <button @click="startScanning">Start Scan</button>
+    <p v-if="decodedText">Decoded text: {{ decodedText }}</p>
+    <stream-barcode-reader v-if="scannerEnabled" @newCode="onDecode"></stream-barcode-reader>
+  </div>
 </template>
 
 <script>
 import { StreamBarcodeReader } from "vue-barcode-reader";
+
 export default {
   data() {
     return {
-      successTest: false
+      decodedText: null,
+      scannerEnabled: false,
     };
   },
+  components: {
+    StreamBarcodeReader,
+  },
   methods: {
-    onDecode(text) {
-      console.log(`Decode text from QR code is ${text}`)
+    onDecode(code) {
+      this.decodedText = code;
     },
-    onLoaded() {
-      console.log(`Ready to start scanning barcodes`)
+    startScanning() {
+      this.scannerEnabled = !this.scannerEnabled;
     },
-    toggleText() {
-      this.successTest = !this.successTest;
-    }
-  }
+  },
 };
 </script>
