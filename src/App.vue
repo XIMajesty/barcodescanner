@@ -8,6 +8,7 @@
     v-if="successTest"
   ></StreamBarcodeReader>
   <p>{{ decodedText }}</p>
+  <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.prospektangebote.de%2Fgeschaefte%2Fnetto-getraenke-discount%2Fangebote%2Flimetto-cola-mix-o-cola-mix-zero-20-500-ml-angebot-20595789%2F&psig=AOvVaw00tjwK0Q0lAh_MJiVuOXjP&ust=1697296085067000&source=images&cd=vfe&opi=89978449&ved=0CA8QjRxqFwoTCIjt7uqm84EDFQAAAAAdAAAAABAD" alt="Cola-Mix Limonade" v-if="decodedText == 42261322">
 </template>
 
 <script>
