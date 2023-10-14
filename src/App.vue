@@ -11,6 +11,7 @@
 
 <script>
 import { StreamBarcodeReader } from "vue-barcode-reader";
+
 export default {
   data() {
     return {
@@ -23,16 +24,34 @@ export default {
   },
   methods: {
     onDecode(text) {
-      console.log(`Decode text from QR code is ${text}`)
-      this.decodedText = text
+      console.log(`Decode text from QR code is ${text}`);
+      this.decodedText = text;
       this.successTest = !this.successTest;
 
+      // Send the decoded barcode to the server
+      this.sendBarcodeToServer(text);
     },
     onLoaded() {
-      console.log(`Ready to start scanning barcodes`)
+      console.log(`Ready to start scanning barcodes`);
     },
     toggleKamera() {
       this.successTest = !this.successTest;
+    },
+    sendBarcodeToServer(barcode) {
+      fetch("http://localhost:8080/barcodes", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ barcode: barcode })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Barcode saved:', data);
+        })
+        .catch(error => {
+          console.error('There was an error!', error);
+        });
     }
   }
 };
