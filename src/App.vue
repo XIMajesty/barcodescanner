@@ -1,12 +1,14 @@
 <template>
-  <header>Barcode-Scanner</header>
-  <button @click="toggleKamera">Start Scan</button>
-  <p v-if="successTest"> Scanning</p>
-  <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded" v-if="successTest"></StreamBarcodeReader>
-  <p>{{ decodedText }}</p>
-  <img
-    src="https://img.offers-cdn.net/assets/uploads/offers/de/20595789/limetto-cola-mix-o-cola-mix-zero-20-500-ml-large.jpeg"
-    alt="Cola-Mix Limonade" v-if="decodedText == 42261322">
+  <header>
+    <p id="header">Barcode-Scanner</p>
+  </header>
+  <body>
+    <button @click="toggleKamera">Start Scan</button>
+    <p v-if="successTest"> Scanning</p>
+    <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded" v-if="successTest"></StreamBarcodeReader>
+    <p>{{ decodedText }}</p>
+    <img src="https://img.offers-cdn.net/assets/uploads/offers/de/20595789/limetto-cola-mix-o-cola-mix-zero-20-500-ml-large.jpeg" alt="Cola-Mix Limonade" v-if="decodedText == 42261322">
+  </body>
 </template>
 
 <script>
@@ -66,7 +68,7 @@ body {
   background-color: #212020;
 }
 
-header {
+#header {
   background-color: #333;
   color: #fff;
   text-align: center;
@@ -95,9 +97,9 @@ button:active {
 }
 
 p {
+  color: white;
   text-align: center;
   padding: 10px;
-  background-color: #eee;
   border-radius: 5px;
   font-size: 16px;
 }
