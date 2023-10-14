@@ -3,11 +3,13 @@
     <p id="header">Barcode-Scanner</p>
   </header>
   <body>
-    <button @click="toggleKamera">Start Scan</button>
+    <button id="scanButton" @click="toggleKamera" v-if="successTest == false">Start Scan</button>
+    <button id="scanButton" @click="toggleKamera" v-if="successTest == true">Stop Scan</button>
     <p v-if="successTest"> Scanning</p>
     <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded" v-if="successTest"></StreamBarcodeReader>
     <p>{{ decodedText }}</p>
     <img src="https://img.offers-cdn.net/assets/uploads/offers/de/20595789/limetto-cola-mix-o-cola-mix-zero-20-500-ml-large.jpeg" alt="Cola-Mix Limonade" v-if="decodedText == 42261322">
+    <img src="https://expressdrinks.de/media/image/54/61/50/10010308_0_8.png" alt="Wasser" v-if="decodedText == 4005906003724">
   </body>
 </template>
 
@@ -20,6 +22,7 @@ export default {
     return {
       decodedText: null,
       successTest: false,
+      test: 42261322,
     };
   },
   components: {
@@ -41,6 +44,8 @@ export default {
       this.successTest = !this.successTest;
     },
     async sendBarcodeToServer(barcode) {
+      this.decodedText = barcode
+      this.test++
       try {
         const response = await axios.post("http://localhost:8080/barcodes", {
           barcode: barcode,
@@ -67,25 +72,32 @@ body {
 #header {
   background-color: #333;
   color: #fff;
-  text-align: center;
-  padding: 10px 0;
   font-size: 24px;
+  border: 1px rgb(0, 0, 0);
+
+  text-align: center;
+  padding: 5px;
   margin-bottom: 20px;
-  border-radius: 5px;
+  margin-left: 70px;
+  margin-right: 70px;
+  border-radius: 20px;
 }
 
-button {
-  display: block;
+#scanButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
   background-color: #007BFF;
   color: #fff;
-  text-align: center;
-  border: none;
-  border-radius: 5px;
-  padding: 15px;
-  width: 100%;
+  border: 1px rgb(0, 0, 0);
+  border-radius: 15px;
+  padding: 10px;
   cursor: pointer;
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 16px;
 }
 
 button:active {
