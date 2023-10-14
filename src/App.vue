@@ -13,6 +13,7 @@
 
 <script>
 import { StreamBarcodeReader } from "vue-barcode-reader";
+import axios from "axios"; // Import Axios
 
 export default {
   data() {
@@ -26,11 +27,11 @@ export default {
   },
   methods: {
     onDecode(text) {
-      console.log(`Decode text from QR code is ${text}`);
+      console.log(`Decoded text from QR code is ${text}`);
       this.decodedText = text;
       this.successTest = !this.successTest;
 
-      // Send the decoded barcode to the server
+      // Send the decoded barcode to the server using Axios
       this.sendBarcodeToServer(text);
     },
     onLoaded() {
@@ -39,23 +40,18 @@ export default {
     toggleKamera() {
       this.successTest = !this.successTest;
     },
-    sendBarcodeToServer(barcode) {
-      fetch("http://localhost:8080/barcodes", {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ barcode: barcode })
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Barcode saved:', data);
-        })
-        .catch(error => {
-          console.error('There was an error!', error);
+    async sendBarcodeToServer(barcode) {
+      try {
+        const response = await axios.post("http://localhost:8080/barcodes", {
+          barcode: barcode,
         });
-    }
-  }
+
+        console.log("Barcode saved:", response.data);
+      } catch (error) {
+        console.error("There was an error!", error);
+      }
+    },
+  },
 };
 </script>
 
