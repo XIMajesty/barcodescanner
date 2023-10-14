@@ -2,6 +2,7 @@
   <header>
     <p id="header">Barcode-Scanner</p>
   </header>
+
   <body>
     <button id="scanButton" @click="toggleKamera" v-if="successTest == false">Start Scan</button>
     <button id="scanButton" @click="toggleKamera" v-if="successTest == true">Stop Scan</button>
@@ -47,7 +48,7 @@ export default {
       this.decodedText = barcode
       this.test++
       try {
-        const response = await axios.post("http://localhost:8080/barcodes", {
+        const response = await axios.post("http://localhost:3000/barcodes", {
           barcode: barcode,
         });
 
@@ -148,5 +149,4 @@ img {
   p {
     font-size: 14px;
   }
-}
-</style>
+}</style>
