@@ -2,12 +2,15 @@
   <header>
     <p id="header">Barcode-Scanner</p>
   </header>
+
   <body>
     <button @click="toggleKamera">Start Scan</button>
     <p v-if="successTest"> Scanning</p>
     <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded" v-if="successTest"></StreamBarcodeReader>
     <p>{{ decodedText }}</p>
-    <img src="https://img.offers-cdn.net/assets/uploads/offers/de/20595789/limetto-cola-mix-o-cola-mix-zero-20-500-ml-large.jpeg" alt="Cola-Mix Limonade" v-if="decodedText == 42261322">
+    <img
+      src="https://img.offers-cdn.net/assets/uploads/offers/de/20595789/limetto-cola-mix-o-cola-mix-zero-20-500-ml-large.jpeg"
+      alt="Cola-Mix Limonade" v-if="decodedText == 42261322">
   </body>
 </template>
 
@@ -42,7 +45,7 @@ export default {
     },
     async sendBarcodeToServer(barcode) {
       try {
-        const response = await axios.post("http://localhost:8080/barcodes", {
+        const response = await axios.post("https://brcdscnner.azurewebsites.net/", {
           barcode: barcode,
         });
 
