@@ -45,7 +45,7 @@ export default {
     },
     async sendBarcodeToServer(barcode) {
       try {
-        const response = await axios.post("https://brcdscnner.azurewebsites.net/", {
+        const response = await axios.post("http://localhost:3000/barcodes", {
           barcode: barcode,
         });
 
@@ -139,5 +139,4 @@ img {
   p {
     font-size: 14px;
   }
-}
-</style>
+}</style>
