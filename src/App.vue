@@ -9,8 +9,8 @@
     <p v-if="successTest"> Scanning</p>
     <StreamBarcodeReader @decode="onDecode" @loaded="onLoaded" v-if="successTest"></StreamBarcodeReader>
     <p>{{ decodedText }}</p>
-    <img src="https://img.offers-cdn.net/assets/uploads/offers/de/20595789/limetto-cola-mix-o-cola-mix-zero-20-500-ml-large.jpeg" alt="Cola-Mix Limonade" v-if="decodedText == 42261322">
-    <img src="https://expressdrinks.de/media/image/54/61/50/10010308_0_8.png" alt="Wasser" v-if="decodedText == 4005906003724">
+    <img src="https://img.offers-cdn.net/assets/uploads/offers/de/20595789/limetto-cola-mix-o-cola-mix-zero-20-500-ml-large.jpeg" alt="Cola-Mix Limonade" v-if="decodedText == 42261322 && successTest == false">
+    <img src="https://expressdrinks.de/media/image/54/61/50/10010308_0_8.png" alt="Wasser" v-if="decodedText == 4005906003724 && successTest == false">
   </body>
 </template>
 
