@@ -1,5 +1,7 @@
 <template>
-  <header>Barcode-Scanner</header>
+  <header>
+    <p id="header">Barcode-Scanner</p>
+  </header>
   <body>
     <button @click="toggleKamera">Start Scan</button>
     <p v-if="successTest"> Scanning</p>
@@ -47,7 +49,7 @@ body {
   background-color: #212020;
 }
 
-header {
+#header {
   background-color: #333;
   color: #fff;
   text-align: center;
